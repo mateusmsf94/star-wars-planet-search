@@ -1,38 +1,22 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 function Planet({ info }) {
-  const {
-    name,
-    rotation_period,
-    orbital_period,
-    diameter,
-    climate,
-    gravity,
-    terrain,
-    surface_water,
-    population,
-    films,
-    created,
-    edited,
-    url,
-  } = info;
   return (
     <tr>
-      <td>{name}</td>
-      <td>{rotation_period}</td>
-      <td>{orbital_period}</td>
-      <td>{diameter}</td>
-      <td>{climate}</td>
-      <td>{gravity}</td>
-      <td>{terrain}</td>
-      <td>{surface_water}</td>
-      <td>{population}</td>
-      <td>{films}</td>
-      <td>{created}</td>
-      <td>{edited}</td>
-      <td>{url}</td>
+      <td>{info.name}</td>
+      <td>{info.rotation_period}</td>
+      <td>{info.orbital_period}</td>
+      <td>{info.diameter}</td>
+      <td>{info.climate}</td>
+      <td>{info.gravity}</td>
+      <td>{info.terrain}</td>
+      <td>{info.surface_water}</td>
+      <td>{info.population}</td>
+      <td>{info.films}</td>
+      <td>{info.created}</td>
+      <td>{info.edited}</td>
+      <td>{info.url}</td>
     </tr>
   );
 }
