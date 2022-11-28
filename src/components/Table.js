@@ -35,6 +35,8 @@ function Table() {
     return bools.every((el) => el);
   };
 
+  const opcoes = (opcao) => !selectedFilters.find((filtro) => opcao === filtro.column);
+
   return (
     <div>
       <input
@@ -58,7 +60,7 @@ function Table() {
           'diameter',
           'rotation_period',
           'surface_water',
-        ].map((col) => (
+        ].filter(opcoes).map((col) => (
           <option value={ col } key={ col }>{col}</option>
         ))}
       </select>
