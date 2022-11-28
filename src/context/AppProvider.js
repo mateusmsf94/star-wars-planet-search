@@ -7,11 +7,9 @@ function AppContextProvider({ children }) {
   const [planetsInfo, setPlanetsInfo] = useState('');
 
   useEffect(() => {
-    // declare the async data fetching function
     const fetchData = async () => {
-      // get the data from the api
       const data = await fetch('https://swapi.dev/api/planets');
-      // convert data to json
+
       const json = await data.json();
       json.results.forEach((planet) => {
         delete planet.residents;
