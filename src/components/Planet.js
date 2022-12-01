@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function Planet({ info }) {
   return (
     <tr>
-      <td>{info.name}</td>
+      <td data-testid="planet-name">{info.name}</td>
       <td>{info.rotation_period}</td>
       <td>{info.orbital_period}</td>
       <td>{info.diameter}</td>

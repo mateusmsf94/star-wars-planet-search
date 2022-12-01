@@ -68,24 +68,66 @@ describe('<App />', () => {
     expect(screen.queryByText('Dagobah')).not.toBeInTheDocument()
    })
 
-   test('se o filtro maior que funciona', async () => {
+   test('se a filtra todos planetas com populacao menor que 20000', async () => {
     render(
       <AppContextProvider>
         <App />
       </AppContextProvider>)
-    
-    const colFilter = screen.getByTestId('column-filter');
-    const comparisonFilter = screen.getByTestId('comparison-filter');
-    const valueFilter = screen.getByTestId('value-filter');
-    const btnFilter = screen.getByTestId('button-filter');
-    const select = screen.getByTestId('comparison-filter');
-    fireEvent.change(select, {
-      target: { value: 'menor que'}
-    })
+    const compareFilter = screen.getByTestId('comparison-filter');
+    userEvent.selectOptions(compareFilter, 'menor que')
+    const valueFilter = screen.getByTestId('value-filter')
     userEvent.clear(valueFilter)
-    userEvent.type(valueFilter, '1001')
-    userEvent.click(btnFilter)
-    expect(screen.getAllByRole('row')).toHaveLength(9)
+    userEvent.type(valueFilter, '20000')
+    const btnFiltrar = screen.getByTestId('button-filter');
+    userEvent.click(btnFiltrar)
+    const planets = await screen.findAllByTestId('planet-name')
+    expect(planets).toHaveLength(1)
+
+   })
+
+   test('se a filtra todos planetas com periodo orbital maior que 350 e limpa os filtros', async () => {
+    render(
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>)
+    const colFilter = screen.getByTestId('column-filter');
+    userEvent.selectOptions(colFilter, 'orbital_period')
+    const compareFilter = screen.getByTestId('comparison-filter');
+    userEvent.selectOptions(compareFilter, 'maior que')
+    const valueFilter = screen.getByTestId('value-filter')
+    userEvent.clear(valueFilter)
+    userEvent.type(valueFilter, '350')
+    const btnFiltrar = screen.getByTestId('button-filter');
+    userEvent.click(btnFiltrar)
+    const planets = await screen.findAllByTestId('planet-name')
+    expect(planets).toHaveLength(7)
+    const btnLimpar = screen.getByTestId('button-remove-filters')
+    userEvent.click(btnLimpar)
+    const allPlanets = await screen.findAllByTestId('planet-name')
+    expect(allPlanets).toHaveLength(10)
+
+   })
+
+   test('se a filtra todos planetas com diametro igual a 4900 e depois tira o filtro', async () => {
+    render(
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>)
+    const colFilter = screen.getByTestId('column-filter');
+    userEvent.selectOptions(colFilter, 'diameter')
+    const compareFilter = screen.getByTestId('comparison-filter');
+    userEvent.selectOptions(compareFilter, 'igual a')
+    const valueFilter = screen.getByTestId('value-filter')
+    userEvent.clear(valueFilter)
+    userEvent.type(valueFilter, '4900')
+    const btnFiltrar = screen.getByTestId('button-filter');
+    userEvent.click(btnFiltrar)
+    const planets = await screen.findAllByTestId('planet-name')
+    expect(planets).toHaveLength(1)
+    const btnRemoveOneFilter = screen.getByRole('button', {name: 'Remover'})
+    userEvent.click(btnRemoveOneFilter)
+    const allPlanets = await screen.findAllByTestId('planet-name')
+    expect(allPlanets).toHaveLength(10)
 
    })
   
