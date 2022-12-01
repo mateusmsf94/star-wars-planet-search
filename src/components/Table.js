@@ -14,7 +14,6 @@ function Table() {
   console.log(selected);
 
   const tratarDados = (linha) => {
-    // console.info('Linha: ', linha);
     const bools = [];
     selectedFilters.forEach((filter) => {
       switch (filter.condition) {
@@ -36,6 +35,15 @@ function Table() {
   };
 
   const opcoes = (opcao) => !selectedFilters.find((filtro) => opcao === filtro.column);
+
+  const addCurrFilter = () => {
+    setSelectedFilters([...selectedFilters, selected]);
+    setSelected({
+      column: 'population',
+      condition: 'maior que',
+      value: 0,
+    });
+  };
 
   return (
     <div>
@@ -60,9 +68,13 @@ function Table() {
           'diameter',
           'rotation_period',
           'surface_water',
-        ].filter(opcoes).map((col) => (
-          <option value={ col } key={ col }>{col}</option>
-        ))}
+        ]
+          .filter(opcoes)
+          .map((col) => (
+            <option value={ col } key={ col }>
+              {col}
+            </option>
+          ))}
       </select>
       <select
         data-testid="comparison-filter"
@@ -84,19 +96,13 @@ function Table() {
       <button
         data-testid="button-filter"
         type="button"
-        onClick={ () => {
-          setSelectedFilters([...selectedFilters, selected]);
-          setSelected({
-            column: 'population',
-            condition: 'maior que',
-            value: 0,
-          });
-        } }
+        onClick={ addCurrFilter }
       >
         ADICIONAR
       </button>
       <button
         type="button"
+        data-testid="button-remove-filters"
         onClick={ () => {
           setSelectedFilters([]);
           setSelected({
@@ -108,6 +114,28 @@ function Table() {
       >
         LIMPAR
       </button>
+
+      {selectedFilters.map((filter, index) => (
+        <div key={ index } data-testid="filter">
+          <button
+            type="button"
+            onClick={ () => {
+              const currentFilters = [...selectedFilters];
+              currentFilters.splice(index, 1);
+              setSelectedFilters(currentFilters);
+            } }
+          >
+            Remover
+          </button>
+          <span>
+            {filter.column}
+            {' '}
+            {filter.condition}
+            {' '}
+            {filter.value}
+          </span>
+        </div>
+      ))}
 
       <table>
         <thead>
