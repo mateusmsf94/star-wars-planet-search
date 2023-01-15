@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppProvider';
 import Planet from './Planet';
+import './Table.css';
 
 function Table() {
   const { results } = useContext(AppContext);
@@ -47,73 +48,75 @@ function Table() {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search"
-        onChange={ (e) => {
-          setQuery(e.target.value);
-        } }
-        value={ query }
-        data-testid="name-filter"
-      />
+      <div className="panel">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={ (e) => {
+            setQuery(e.target.value);
+          } }
+          value={ query }
+          data-testid="name-filter"
+        />
 
-      <select
-        data-testid="column-filter"
-        value={ selected.column }
-        onChange={ (e) => setSelected({ ...selected, column: e.target.value }) }
-      >
-        {[
-          'population',
-          'orbital_period',
-          'diameter',
-          'rotation_period',
-          'surface_water',
-        ]
-          .filter(opcoes)
-          .map((col) => (
-            <option value={ col } key={ col }>
-              {col}
-            </option>
-          ))}
-      </select>
-      <select
-        data-testid="comparison-filter"
-        value={ selected.condition }
-        onChange={ (e) => setSelected({ ...selected, condition: e.target.value }) }
-      >
-        <option value="maior que">maior que</option>
-        <option value="menor que">menor que</option>
-        <option value="igual a">igual a</option>
-      </select>
+        <select
+          data-testid="column-filter"
+          value={ selected.column }
+          onChange={ (e) => setSelected({ ...selected, column: e.target.value }) }
+        >
+          {[
+            'population',
+            'orbital_period',
+            'diameter',
+            'rotation_period',
+            'surface_water',
+          ]
+            .filter(opcoes)
+            .map((col) => (
+              <option value={ col } key={ col }>
+                {col}
+              </option>
+            ))}
+        </select>
+        <select
+          data-testid="comparison-filter"
+          value={ selected.condition }
+          onChange={ (e) => setSelected({ ...selected, condition: e.target.value }) }
+        >
+          <option value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
+        </select>
 
-      <input
-        data-testid="value-filter"
-        placeholder="Digite o valor"
-        value={ selected.value }
-        onChange={ (e) => setSelected({ ...selected, value: e.target.value }) }
-      />
+        <input
+          data-testid="value-filter"
+          placeholder="Digite o valor"
+          value={ selected.value }
+          onChange={ (e) => setSelected({ ...selected, value: e.target.value }) }
+        />
 
-      <button
-        data-testid="button-filter"
-        type="button"
-        onClick={ addCurrFilter }
-      >
-        ADICIONAR
-      </button>
-      <button
-        type="button"
-        data-testid="button-remove-filters"
-        onClick={ () => {
-          setSelectedFilters([]);
-          setSelected({
-            column: '',
-            condition: '',
-            value: '',
-          });
-        } }
-      >
-        LIMPAR
-      </button>
+        <button
+          data-testid="button-filter"
+          type="button"
+          onClick={ addCurrFilter }
+        >
+          ADICIONAR
+        </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ () => {
+            setSelectedFilters([]);
+            setSelected({
+              column: '',
+              condition: '',
+              value: '',
+            });
+          } }
+        >
+          LIMPAR
+        </button>
+      </div>
 
       {selectedFilters.map((filter, index) => (
         <div key={ index } data-testid="filter">
