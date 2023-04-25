@@ -45,9 +45,9 @@ function Table() {
       value: 0,
     });
   };
-
+  
   return (
-    <div>
+    <div className='container'>
       <div className="panel">
         <input
           type="text"
@@ -58,7 +58,8 @@ function Table() {
           value={ query }
           data-testid="name-filter"
         />
-
+      </div>
+      <div className='filters'>
         <select
           data-testid="column-filter"
           value={ selected.column }
@@ -117,7 +118,6 @@ function Table() {
           LIMPAR
         </button>
       </div>
-
       {selectedFilters.map((filter, index) => (
         <div key={ index } data-testid="filter">
           <button
@@ -152,7 +152,7 @@ function Table() {
             <th>Terrain</th>
             <th>Surface Water</th>
             <th>Population</th>
-            <th>Films</th>
+            <th style={{width: '300px'}}>Films</th>
             <th>Created</th>
             <th>Edited</th>
             <th>URL</th>
