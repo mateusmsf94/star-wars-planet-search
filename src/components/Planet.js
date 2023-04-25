@@ -13,7 +13,7 @@ function Planet({ info }) {
       <td>{info.terrain}</td>
       <td>{info.surface_water}</td>
       <td>{info.population}</td>
-      <td style={{ width: '300px', wordWrap: 'break-word'}}>{info.films}</td>
+      <td style={ { width: '300px', wordWrap: 'break-word' } }>{info.films}</td>
       <td>{info.created}</td>
       <td>{info.edited}</td>
       <td>{info.url}</td>

@@ -5,7 +5,7 @@ import SvgHeader from './components/Header';
 
 function App() {
   return (
-    <div className='background-image'>
+    <div className="background-image">
       <SvgHeader />
       <Table />
     </div>
