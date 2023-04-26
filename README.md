@@ -10,7 +10,6 @@ Este projeto tem como objetivo criar uma aplicação que consome a API de Star W
 - Implementação de múltiplos filtros numéricos;
 - Não utilizar filtros repetidos;
 - Remoção de filtros de valor numérico e de todas as filtragens numéricas;
-- Ordenação das colunas de forma ascendente ou descendente.
 
 ## :construction_worker: Instalação
 
