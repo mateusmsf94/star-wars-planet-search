@@ -45,7 +45,6 @@ function Table() {
       value: 0,
     });
   };
-
   return (
     <div className="container">
       <div className="panel">
@@ -95,7 +94,7 @@ function Table() {
           value={ selected.value }
           onChange={ (e) => setSelected({ ...selected, value: e.target.value }) }
         />
-
+        {selected.column === 'diameter' && <span>in km</span>}
         <button
           data-testid="button-filter"
           type="button"

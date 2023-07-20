@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import formatDate from '../utils/formatDate';
 
 function Planet({ info }) {
   return (
@@ -7,15 +8,15 @@ function Planet({ info }) {
       <td data-testid="planet-name">{info.name}</td>
       <td>{info.rotation_period}</td>
       <td>{info.orbital_period}</td>
-      <td>{info.diameter}</td>
+      <td>{`${info.diameter} km`}</td>
       <td>{info.climate}</td>
       <td>{info.gravity}</td>
       <td>{info.terrain}</td>
       <td>{info.surface_water}</td>
       <td>{info.population}</td>
       <td style={ { width: '300px', wordWrap: 'break-word' } }>{info.films}</td>
-      <td>{info.created}</td>
-      <td>{info.edited}</td>
+      <td>{formatDate(info.created)}</td>
+      <td>{formatDate(info.edited)}</td>
       <td>{info.url}</td>
     </tr>
   );
