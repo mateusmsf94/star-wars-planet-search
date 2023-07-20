@@ -7,7 +7,7 @@ function Planet({ info }) {
       <td data-testid="planet-name">{info.name}</td>
       <td>{info.rotation_period}</td>
       <td>{info.orbital_period}</td>
-      <td>{info.diameter}</td>
+      <td>{`${info.diameter} km`}</td>
       <td>{info.climate}</td>
       <td>{info.gravity}</td>
       <td>{info.terrain}</td>
