@@ -45,7 +45,6 @@ function Table() {
       value: 0,
     });
   };
-
   return (
     <div className="container">
       <div className="panel">
